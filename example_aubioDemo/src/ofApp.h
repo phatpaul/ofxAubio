@@ -27,10 +27,12 @@ class ofApp : public ofBaseApp{
         void audioOut();
 
         void onsetEvent(float & time);
+        void onset2Event(float & time);
         void beatEvent(float & time);
 
     private:
         ofxAubioOnset onset;
+        ofxAubioOnset onset2;
         ofxAubioPitch pitch;
         ofxAubioBeat beat;
         ofxAubioMelBands bands;
@@ -41,13 +43,27 @@ class ofApp : public ofBaseApp{
 
         ofxPanel beatGui;
         bool gotBeat;
+        ofxFloatSlider beatThreshold;
         ofxFloatSlider bpm;
+        ofxFloatSlider beatConfidence;
+        ofxIntSlider tatum;
+        ofxIntSlider tatumSig;
 
         ofxPanel onsetGui;
         bool gotOnset;
         ofxFloatSlider onsetThreshold;
+        ofxToggle onsetWhiteningEn;
+        ofxFloatSlider onsetMinioi;
         ofxFloatSlider onsetNovelty;
         ofxFloatSlider onsetThresholdedNovelty;
+
+        ofxPanel onset2Gui;
+        bool gotOnset2;
+        ofxFloatSlider onset2Threshold;
+        ofxToggle onset2WhiteningEn;
+        ofxFloatSlider onset2Minioi;
+        ofxFloatSlider onset2Novelty;
+        ofxFloatSlider onset2ThresholdedNovelty;
 
         ofxPanel bandsGui;
         ofPolyline bandPlot;

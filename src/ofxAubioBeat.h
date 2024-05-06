@@ -38,9 +38,16 @@ class ofxAubioBeat : public ofxAubioBlock {
        static ofEvent<float> gotGlobalBeat;
 
        void setup();
-       void setup(string method, int buf_s, int hop_s, int samplerate);
+       void setup(std::string method, int buf_s, int hop_s, int samplerate);
+
+       void setThreshold(float threshold);
+       void setTatumSig(int newTatumSig);
 
        float bpm;
+       float confidence;
+       float threshold;
+       int tatum;
+       int tatumSignature;
 
     private:
        void blockAudioIn();

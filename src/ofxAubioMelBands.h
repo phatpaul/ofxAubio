@@ -34,7 +34,7 @@ class ofxAubioMelBands : public ofxAubioBlock {
        ~ofxAubioMelBands();
 
        void setup();
-       void setup(string method, int buf_s, int hop_s, int samplerate);
+       void setup(std::string method, int buf_s, int hop_s, int samplerate);
 
        int nBands;
        float *energies;

@@ -32,13 +32,15 @@ void ofxAubioBeat::setup()
     setup("default", 512, 256, 44100);
 }
 
-void ofxAubioBeat::setup(string method, int buf_s, int hop_s, int samplerate)
+void ofxAubioBeat::setup(std::string method, int buf_s, int hop_s, int samplerate)
 {
     ofxAubioBlock::setup(method, buf_s, hop_s, samplerate);
     tempo = new_aubio_tempo((char_t*)method.c_str(),
                             buf_size, hop_size, samplerate);
     aubio_tempo_set_silence(tempo, -40);
     if (tempo) {
+        tatumSignature = 1; //aubio_get_tatum - not available
+        threshold = aubio_tempo_get_threshold(tempo);
         ofLogNotice() << "created ofxAubioBeat(" << method
           << ", " << buf_size
           << ", " << hop_size
@@ -60,8 +62,22 @@ void ofxAubioBeat::blockAudioIn()
     if (aubio_output->data[0]) {
         //ofLogNotice() << "found beat: " << aubio_output->data[0];
         bpm = aubio_tempo_get_bpm(tempo);
+        confidence = aubio_tempo_get_confidence(tempo);
+        tatum = aubio_tempo_was_tatum(tempo);
         float last_beat = aubio_tempo_get_last_s(tempo);
         ofNotifyEvent(gotBeat, last_beat, this);
         ofNotifyEvent(gotGlobalBeat, last_beat);
     }
+}
+
+void ofxAubioBeat::setTatumSig(int newTatumSig)
+{
+    aubio_tempo_set_tatum_signature(tempo, newTatumSig);
+    tatumSignature = newTatumSig;
+}
+
+void ofxAubioBeat::setThreshold(float newThreshold)
+{
+    aubio_tempo_set_threshold(tempo, newThreshold);
+    threshold = newThreshold;
 }

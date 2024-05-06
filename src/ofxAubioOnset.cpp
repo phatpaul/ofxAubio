@@ -32,13 +32,15 @@ void ofxAubioOnset::setup()
     setup("default", 512, 256, 44100);
 }
 
-void ofxAubioOnset::setup(string method, int buf_s, int hop_s, int samplerate)
+void ofxAubioOnset::setup(std::string method, int buf_s, int hop_s, int samplerate)
 {
     ofxAubioBlock::setup(method, buf_s, hop_s, samplerate);
     onset = new_aubio_onset((char_t*)method.c_str(),
                             buf_size, hop_size, samplerate);
     if (onset) {
         threshold = aubio_onset_get_threshold(onset);
+        minioi = aubio_onset_get_minioi_ms(onset);
+        whiteningEn = aubio_onset_get_awhitening(onset);
         ofLogNotice() << "created ofxAubioOnset(" << method
           << ", " << buf_size
           << ", " << hop_size
@@ -56,6 +58,7 @@ ofxAubioOnset::~ofxAubioOnset()
 
 void ofxAubioOnset::blockAudioIn()
 {
+    
     aubio_onset_do(onset, aubio_input, aubio_output);
     if (aubio_output->data[0]) {
         //ofLogNotice() << "found onset";
@@ -71,4 +74,16 @@ void ofxAubioOnset::setThreshold(float newThreshold)
 {
     aubio_onset_set_threshold(onset, newThreshold);
     threshold = newThreshold;
+}
+
+void ofxAubioOnset::setMinioi(float newMinioi)
+{
+    aubio_onset_set_minioi_ms(onset, newMinioi);
+    minioi = newMinioi;
+}
+
+void ofxAubioOnset::setWhiteningEn(int newWhiteningEn)
+{
+    aubio_onset_set_awhitening(onset, newWhiteningEn?(1):(0));
+    whiteningEn = newWhiteningEn;
 }

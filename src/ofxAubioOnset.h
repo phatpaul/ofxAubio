@@ -39,10 +39,14 @@ class ofxAubioOnset : public ofxAubioBlock {
        void setup(std::string method, int buf_s, int hop_s, int samplerate);
 
        void setThreshold(float threshold);
+       void setMinioi(float newMinioi);
+       void setWhiteningEn(int newWhiteningEn);
 
        float novelty = 0;
        float thresholdedNovelty = 0;
        float threshold;
+       float minioi;
+       int whiteningEn;
 
     private:
        void blockAudioIn();

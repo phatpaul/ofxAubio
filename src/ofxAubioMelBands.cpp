@@ -30,7 +30,7 @@ void ofxAubioMelBands::setup()
     setup("default", 512, 256, 44100);
 }
 
-void ofxAubioMelBands::setup(string method, int buf_s, int hop_s, int samplerate)
+void ofxAubioMelBands::setup(std::string method, int buf_s, int hop_s, int samplerate)
 {
     ofxAubioBlock::setup(method, buf_s, hop_s, samplerate);
     nBands = 40;

@@ -1,3 +1,8 @@
 *.~[0-9]~
 *.swp
 example_aubioDemo/aubio.framework
+example_aubioDemo/bin/
+example_aubioDemo/obj/
+example_aubioDemo/config.make
+example_aubioDemo/*.qbs
+example_aubioDemo/*.qbs.user

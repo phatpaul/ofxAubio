@@ -30,7 +30,7 @@ void ofxAubioPitch::setup()
     setup("default", 2048, 256, 44100);
 }
 
-void ofxAubioPitch::setup(string method, int buf_s, int hop_s, int samplerate)
+void ofxAubioPitch::setup(std::string method, int buf_s, int hop_s, int samplerate)
 {
     ofxAubioBlock::setup(method, buf_s, hop_s, samplerate);
     pitch = new_aubio_pitch((char_t*)method.c_str(),
