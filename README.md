@@ -8,6 +8,33 @@ for [aubio](https://aubio.org).
 Install
 -------
 
+### Linux
+
+Clone `ofxAubio` in your addons folder:
+
+    $ cd /path/to/of_root/addons
+    $ git clone git://git.aubio.org/git/ofxAubio/
+
+Install `aubio` library and headers, on Debian/Ubuntu:
+
+    $ sudo sudo apt-get install libaubio-dev
+
+Select projectGenerator, select 'update project', then select the path of
+`example_aubioDemo`, `/path/to/of_root/addons/ofxAubio/example_aubioDemo`.
+
+In the generated project edit `config.make` and add/edit this line to this:
+
+    PROJECT_LDFLAGS=-laubio
+
+Build the example:
+```sh
+make
+```
+Run the example:
+```sh
+make RunRelease
+```
+
 ### MacOSX
 
 Fetch `ofxAubio` and `aubio.framework` from inside your openFrameworks root:
