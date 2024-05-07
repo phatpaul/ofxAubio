@@ -52,6 +52,7 @@ class ofApp : public ofBaseApp{
         ofxPanel onsetGui;
         bool gotOnset;
         ofxFloatSlider onsetThreshold;
+        ofxFloatSlider onsetCompression;
         ofxToggle onsetWhiteningEn;
         ofxFloatSlider onsetMinioi;
         ofxFloatSlider onsetNovelty;
@@ -60,6 +61,7 @@ class ofApp : public ofBaseApp{
         ofxPanel onset2Gui;
         bool gotOnset2;
         ofxFloatSlider onset2Threshold;
+        ofxFloatSlider onset2Compression;
         ofxToggle onset2WhiteningEn;
         ofxFloatSlider onset2Minioi;
         ofxFloatSlider onset2Novelty;

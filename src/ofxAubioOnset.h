@@ -41,12 +41,14 @@ class ofxAubioOnset : public ofxAubioBlock {
        void setThreshold(float threshold);
        void setMinioi(float newMinioi);
        void setWhiteningEn(int newWhiteningEn);
+       void setCompression(float newCompression);
 
        float novelty = 0;
        float thresholdedNovelty = 0;
        float threshold;
        float minioi;
        int whiteningEn;
+       float compression;
 
     private:
        void blockAudioIn();

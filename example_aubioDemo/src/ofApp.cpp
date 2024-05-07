@@ -16,7 +16,7 @@ void ofApp::setup(){
     // The parameter method is a string that can be any of: default, old_default,
     // - onset novelty functions: complex, energy, hfc, kl, mkl, phase, specdiff, specflux, wphase, 
     // - spectral descriptors: centroid, decrease, kurtosis, rolloff, skewness, slope, spread
-    onset2.setup("specflux", 512, 256, 44100);
+    onset2.setup("energy", 512, 256, 44100);
     // listen to onset event
     ofAddListener(onset2.gotOnset, this, &ofApp::onset2Event);
 
@@ -64,6 +64,7 @@ void ofApp::setup(){
     start += 250;
     onsetGui.setup("ofxAubioOnset", "settings.xml", start + 10, 10);
     onsetGui.add(onsetThreshold.setup( "threshold", 0, 0, 2));
+    onsetGui.add(onsetCompression.setup("compression", 0, 0, 10));
     onsetGui.add(onsetWhiteningEn.setup( "whitening", false));
     onsetGui.add(onsetMinioi.setup( "min interval", 0, 0, 2000));
     onsetGui.add(onsetNovelty.setup( "onset novelty", 0, 0, 10000));
@@ -72,11 +73,13 @@ void ofApp::setup(){
     onsetThreshold = onset.threshold;
     onsetMinioi = onset.minioi;
     onsetWhiteningEn = onset.whiteningEn?(true):(false);
+    onsetCompression = onset.compression;
 
     // GUI ofxAubioOnset2
     start += 250;
     onset2Gui.setup("ofxAubioOnset2", "settings.xml", start + 10, 10);
     onset2Gui.add(onset2Threshold.setup( "threshold", 0, 0, 2));
+    onset2Gui.add(onset2Compression.setup("compression", 0, 0, 10));
     onset2Gui.add(onset2WhiteningEn.setup( "whitening", false));
     onset2Gui.add(onset2Minioi.setup( "min interval", 0, 0, 2000));
     onset2Gui.add(onset2Novelty.setup( "onset novelty", 0, 0, 10000));
@@ -85,6 +88,7 @@ void ofApp::setup(){
     onset2Threshold = onset2.threshold;
     onset2Minioi = onset2.minioi;
     onset2WhiteningEn = onset2.whiteningEn?(true):(false);
+    onset2Compression = onset2.compression;
 
     // GUI ofxAubioPitch
     start += 250;
@@ -123,10 +127,12 @@ void audioOut(){
 //--------------------------------------------------------------
 void ofApp::update(){
     onset.setThreshold(onsetThreshold);
+    onset.setCompression(onsetCompression);
     onset.setMinioi(onsetMinioi);
     onset.setWhiteningEn(onsetWhiteningEn);
 
     onset2.setThreshold(onset2Threshold);
+    onset2.setCompression(onset2Compression);
     onset2.setMinioi(onset2Minioi);
     onset2.setWhiteningEn(onset2WhiteningEn);
 

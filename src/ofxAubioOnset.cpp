@@ -41,6 +41,7 @@ void ofxAubioOnset::setup(std::string method, int buf_s, int hop_s, int samplera
         threshold = aubio_onset_get_threshold(onset);
         minioi = aubio_onset_get_minioi_ms(onset);
         whiteningEn = aubio_onset_get_awhitening(onset);
+        compression = aubio_onset_get_compression(onset);
         ofLogNotice() << "created ofxAubioOnset(" << method
           << ", " << buf_size
           << ", " << hop_size
@@ -86,4 +87,10 @@ void ofxAubioOnset::setWhiteningEn(int newWhiteningEn)
 {
     aubio_onset_set_awhitening(onset, newWhiteningEn?(1):(0));
     whiteningEn = newWhiteningEn;
+}
+
+void ofxAubioOnset::setCompression(float newCompression)
+{
+    aubio_onset_set_compression(onset, newCompression);
+    compression = newCompression;
 }
